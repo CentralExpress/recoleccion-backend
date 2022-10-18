@@ -32,8 +32,8 @@ app.post('/upload', (req, res) => {
 
 https
   .createServer(app, {
-    cert: fs.readFileSync('./certs/centificate.pem'),
-    key: fs.readFileSync('./certs/key.pem')
+    cert: fs.readFileSync(path.join(__dirname,'./certs/centificate.pem')),
+    key: fs.readFileSync(path.join(__dirname,'./certs/key.pem'))
   })
   .listen(4000, ()=>{
     console.log('server is runing at port 4000')
