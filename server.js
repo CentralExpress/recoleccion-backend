@@ -30,13 +30,11 @@ app.post('/upload', (req, res) => {
     });
 })
 
-
-/* app.listen(3000, () => {
-    console.log('server is running at port 3000');
-})
- */
 https
-  .createServer(app)
+  .createServer(app, {
+    cert: fs.readFileSync('./certs/centificate.pem'),
+    key: fs.readFileSync('./certs/key.pem')
+  })
   .listen(4000, ()=>{
-    console.log('server is runing at port 3000')
+    console.log('server is runing at port 4000')
   });
