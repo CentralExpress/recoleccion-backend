@@ -36,7 +36,7 @@ app.post('/upload', (req, res) => {
         return res.status(500).send({ msg: "Archivo no encontrado" })
     }
         // accessing the file
-    const myFile = req.files['uploads[]'];
+    const myFile = req.files.simpleFile;
 
     //  mv() method places the file inside public directory
     myFile.mv(`${__dirname}/public/${myFile.name}`, function (err) {
