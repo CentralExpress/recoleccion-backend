@@ -36,10 +36,10 @@ app.post('/upload', (req, res) => {
         return res.status(500).send({ msg: "Archivo no encontrado" })
     }
         // accessing the file
-    const myFile = req.file;
+    const myFile = req.files.file as UploadedFile;
 
     //  mv() method places the file inside public directory
-    myFile.mv(`${__dirname}/public/${myFile.name}`, function (err) {
+    myFile.mv(`${__dirname}/../public/${myFile.name}`, function (err) {
         if (err) {
             console.log(err)
             return res.status(500).send({ msg: "Ocurrió un error" });
