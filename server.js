@@ -27,7 +27,7 @@ const corsOptions = {
     allowedHeaders: 'Content-Type,Authorization',
     exposedHeaders: 'Content-Range,X-Content- Range'
 };
-app.options('/imageUrl', cors(corsOptions));
+app.options('/upload', cors(corsOptions));
 
  // file upload api
 app.post('/upload', (req, res) => {
