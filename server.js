@@ -1,7 +1,7 @@
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const cors = require('cors')
-const https = require("https");
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -16,6 +16,18 @@ app.use(function(req, res, next) {
     next();
 });
 app.use(fileUpload());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(express.json());
+
+const corsOptions = {
+    origin: 'https://reco.centralexpress.info/',
+    methods: 'GET, POST, PUT',
+    credentials: true,
+    allowedHeaders: 'Content-Type,Authorization',
+    exposedHeaders: 'Content-Range,X-Content- Range'
+};
+app.options('/imageUrl', cors(corsOptions));
 
  // file upload api
 app.post('/upload', (req, res) => {
