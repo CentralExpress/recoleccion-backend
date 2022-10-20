@@ -8,9 +8,16 @@ const app = express();
 // middle ware
 app.use(express.static('public')); //to access the files in public folder
 app.use(cors()); // it enables all cors requests
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
 app.use(fileUpload());
 
-// file upload api
+ // file upload api
 app.post('/upload', (req, res) => {
 
     if (!req.files) {
@@ -30,11 +37,9 @@ app.post('/upload', (req, res) => {
     });
 })
 
-https
-  .createServer(app, {
-    cert: fs.readFileSync(path.join(__dirname,'./certs/centificate.pem')),
-    key: fs.readFileSync(path.join(__dirname,'./certs/key.pem'))
-  })
-  .listen(4000, ()=>{
-    console.log('server is runing at port 4000')
-  });
+//start app 
+const port = process.env.PORT || 4000;
+
+app.listen(port, () => 
+  console.log(`App is listening on port ${port}.`)
+); 
